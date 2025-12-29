@@ -127,7 +127,7 @@
         .hero {
             margin-top: 80px;
             height: 90vh;
-            width: 1600px;
+            /*width: 1600px;        TODO: Eventuell einfügen gerade raus für handy optimierung*/
             background: linear-gradient(135deg, rgba(44, 95, 45, 0.9), rgba(26, 26, 26, 0.8)),
                         url('titel.jpeg')no-repeat center center;
             background-size: cover;
@@ -295,17 +295,24 @@
         }
 
         .service-icon {
-            width: 100%;
-            height: 200px;
-            background: #e0e0e0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: #999;
-            font-size: 0.95rem;
-        }
+    width: 100%;
+    height: 200px;
+    background: none;          /* Platzhalterfarbe entfernen */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;          /* Bild nicht über Container hinaus */
+}
+
+.service-icon img {
+    width: 100%;
+    height: 100%;             /* Containerhöhe ausfüllen */
+    object-fit: cover;        /* proportional zuschneiden, wenn nötig */
+    border-radius: 8px;       /* optional, gleiche Rundung wie Container */
+}
+
 
         .service-card h3 {
             font-size: 1.5rem;
@@ -320,23 +327,38 @@
 
         /* ==================== PROJECTS SECTION ==================== */
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
 
-        .project-item {
-            position: relative;
-            height: 300px;
-            background: #d5d5d5;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            opacity: 0;
-            transform: scale(0.9);
-        }
+.project-item {
+    position: relative;
+    width: 300px;             /* Breite der Projekt-Box */
+    height: 400px;            /* Höhe der Projekt-Box */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.project-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* proportional und zuschneiden falls nötig */
+    display: block;
+}
+
+.project-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
 
         .project-item.visible {
             animation: scaleIn 0.5s ease forwards;
@@ -761,171 +783,215 @@
             background-color: yellow;
             padding: 2px 4px;
         }
+
+        .project-features {
+    list-style: disc;          /* klassische Aufzählungspunkte */
+    padding-left: 1.2rem;      /* Abstand der Punkte */
+    margin: 0.5rem 0 0;
+    text-align: left;          /* besser lesbar als zentriert */
+    font-size: 0.9rem;
+}
+
+.project-features li {
+    margin-bottom: 0.3rem;
+}
+
     </style>
 </head>
 <body>
-    <!-- ==================== HEADER & NAVIGATION ==================== -->
-    <header id="header">
-        <nav>
-            <a href="#home" class="logo">
+<!-- ==================== HEADER & NAVIGATION ==================== -->
+<header id="header">
+    <nav>
+        <a href="#home" class="logo">
             <img src="mala-logo.png" alt="MALA Logo"></a>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Startseite</a></li>
-                <li><a href="#services">Dienstleistungen</a></li>
-                <li><a href="#projects">Unsere Projekte</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-                <!--Suchleiste eventuell einfügen-->
-            </ul>
-        </nav>
-    </header>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Startseite</a></li>
+            <li><a href="#services">Dienstleistungen</a></li>
+            <li><a href="#projects">Unsere Projekte</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+            <!--Suchleiste eventuell einfügen-->
+        </ul>
+    </nav>
+</header>
 
-    <!-- ==================== HERO SECTION ==================== -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>MALA – Gebäude & Grün im Einklang</h1>
-            <p>Kompetenter Komplettservice für Ihre Immobilie – Alles aus einer Hand</p>
-            <a href="#contact" class="cta-button">Jetzt Kontakt aufnehmen</a>
-        </div>
-    </section>
-
-    <!-- ==================== ABOUT SECTION ==================== -->
-    <section id="about">
-        <h2 class="section-title">Über uns</h2>
-        <p class="section-subtitle">Ihr zuverlässiger Partner in Holzgerlingen und Umgebung</p>
-        <div class="about-content">
-            <div class="about-text">
-                <h3>Ihre Immobilie in besten Händen</h3>
-                <p>Willkommen bei MALA! Wir sind Ihr zuverlässiger Partner für Hausmeisterservice, Gebäudereinigung und Garten- und Landschaftspflege im Kreis Holzgerlingen.</p>
-                <p>Mit langjähriger Erfahrung und einem engagierten Team bieten wir Ihnen maßgeschneiderte Lösungen für die professionelle Betreuung Ihrer Immobilie – innen wie außen.</p>
-                <p>Unser erfahrenes Team kümmert sich um Grünflächenpflege, Winterdienst, Reinigung, Reparaturen und alle weiteren Aufgaben rund um Ihr Objekt. Als lokales Unternehmen sind wir schnell vor Ort und kennen die Bedürfnisse unserer Region.</p>
-            </div>
-            <div class="about-image">
-    <img src="about_us.jpg" alt="Beschreibung des Bildes">
-</div>
-
-        </div>
-    </section>
-
-    <!-- ==================== EQUIPMENT SECTION ==================== -->
-    <section class="equipment-section">
-        <h2 class="section-title">Moderne Ausstattung</h2>
-        <p class="section-subtitle">Hochwertige Fahrzeuge und professionelle Ausrüstung</p>
-        <div class="equipment-content">
-            <div class="equipment-images">
-    <div class="equipment-image">
-        <img src="Fahrzeug1.jpg" alt="Fahrzeug 1">
+<!-- ==================== HERO SECTION ==================== -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>MALA – Gebäude & Grün im Einklang</h1>
+        <p>Kompetenter Komplettservice für Ihre Immobilie – Alles aus einer Hand</p>
+        <a href="#contact" class="cta-button">Jetzt Kontakt aufnehmen</a>
     </div>
-    <div class="equipment-image">
-        <img src="fahrzeuge2.JPG" alt="Fahrzeug 2">
-    </div>
-    <div class="equipment-image">
-        <img src="ausruestung1.jpeg" alt="Ausrüstung 1">
-    </div>
-    <div class="equipment-image">
-        <img src="ausruestung2.jpeg" alt="Ausrüstung 2">
-    </div>
-</div>
+</section>
 
-            <div class="equipment-text">
-                <h3>Modernste Technik für beste Ergebnisse</h3>
-                <p>Bei MALA Hausmeister und Dienstleistungen in Holzgerlingen setzen wir auf modernste Technik und professionelle Ausrüstung.</p>
-                <p>Unsere top ausgestatteten Fahrzeuge ermöglichen es uns, jeden Auftrag effizient und qualitativ hochwertig durchzuführen – von der Grünflächenpflege bis zur Gebäudewartung.</p>
-                <p>Mit unserer modernen Ausrüstung garantieren wir Ihnen schnelle und professionelle Arbeit auf höchstem Niveau.</p>
+<!-- ==================== ABOUT SECTION ==================== -->
+<section id="about">
+    <h2 class="section-title">Über uns</h2>
+    <p class="section-subtitle">Ihr zuverlässiger Partner in Holzgerlingen und Umgebung</p>
+    <div class="about-content">
+        <div class="about-text">
+            <h3>Ihre Immobilie in besten Händen</h3>
+            <p>Willkommen bei MALA! Wir sind Ihr zuverlässiger Partner für Hausmeisterservice, Gebäudereinigung und
+                Garten- und Landschaftspflege im Kreis Holzgerlingen.</p>
+            <p>Mit langjähriger Erfahrung und einem engagierten Team bieten wir Ihnen maßgeschneiderte Lösungen für die
+                professionelle Betreuung Ihrer Immobilie – innen wie außen.</p>
+            <p>Unser erfahrenes Team kümmert sich um Grünflächenpflege, Winterdienst, Reinigung, Reparaturen und alle
+                weiteren Aufgaben rund um Ihr Objekt. Als lokales Unternehmen sind wir schnell vor Ort und kennen die
+                Bedürfnisse unserer Region.</p>
+        </div>
+        <div class="about-image">
+            <img src="about_us.jpg" alt="Beschreibung des Bildes">
+        </div>
+
+    </div>
+</section>
+
+<!-- ==================== EQUIPMENT SECTION ==================== -->
+<section class="equipment-section">
+    <h2 class="section-title">Moderne Ausstattung</h2>
+    <p class="section-subtitle">Hochwertige Fahrzeuge und professionelle Ausrüstung</p>
+    <div class="equipment-content">
+        <div class="equipment-images">
+            <div class="equipment-image">
+                <img src="Fahrzeug1.jpg" alt="Fahrzeug 1">
+            </div>
+            <div class="equipment-image">
+                <img src="fahrzeuge2.JPG" alt="Fahrzeug 2">
+            </div>
+            <div class="equipment-image">
+                <img src="ausruestung1.jpeg" alt="Ausrüstung 1">
+            </div>
+            <div class="equipment-image">
+                <img src="ausruestung2.jpeg" alt="Ausrüstung 2">
             </div>
         </div>
-    </section>
 
-    <!-- ==================== SERVICES SECTION ==================== -->
-    <section id="services">
-        <h2 class="section-title">Unsere Dienstleistungen</h2>
-        <p class="section-subtitle">Professioneller Service für Ihre Immobilie</p>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">Bild folgt</div>
-                <h3>Hausmeisterservice</h3>
-                <p>Umfassende Betreuung Ihrer Immobilie mit regelmäßigen Kontrollen, Wartungsarbeiten und schneller Reaktion bei Notfällen. Wir sind Ihr verlässlicher Partner vor Ort.</p>
+        <div class="equipment-text">
+            <h3>Modernste Technik für beste Ergebnisse</h3>
+            <p>Bei MALA Hausmeister und Dienstleistungen in Holzgerlingen setzen wir auf modernste Technik und
+                professionelle Ausrüstung.</p>
+            <p>Unsere top ausgestatteten Fahrzeuge ermöglichen es uns, jeden Auftrag effizient und qualitativ hochwertig
+                durchzuführen – von der Grünflächenpflege bis zur Gebäudewartung.</p>
+            <p>Mit unserer modernen Ausrüstung garantieren wir Ihnen schnelle und professionelle Arbeit auf höchstem
+                Niveau.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== SERVICES SECTION ==================== -->
+<section id="services">
+    <h2 class="section-title">Unsere Dienstleistungen</h2>
+    <p class="section-subtitle">Professioneller Service für Ihre Immobilie</p>
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">
+                <img src="service/hausmeister.jpeg" alt="Hausmeisterservice">
             </div>
-            <div class="service-card">
-                <div class="service-icon">Bild folgt</div>
-                <h3>Gebäudereinigung</h3>
-                <p>Professionelle Reinigung von Treppenhäusern, Büros, Gemeinschaftsräumen und Außenbereichen. Für ein sauberes und gepflegtes Erscheinungsbild Ihrer Immobilie.</p>
+            <h3>Hausmeisterservice</h3>
+            <p>Umfassende Betreuung Ihrer Immobilie mit regelmäßigen Kontrollen, Wartungsarbeiten und schneller Reaktion
+                bei Notfällen. Wir sind Ihr verlässlicher Partner vor Ort.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">
+                <img src="service/reinigung.jpeg" alt="Gebäudereinigung">
             </div>
-            <div class="service-card">
-                <div class="service-icon">Bild folgt</div>
-                <h3>Garten- und Landschaftspflege</h3>
-                <p>Fachgerechte Pflege Ihrer Grünflächen, Rasenmähen, Heckenschnitt, Bepflanzung und Gestaltung. Wir bringen Ihre Außenanlagen zum Strahlen.</p>
+            <h3>Gebäudereinigung</h3>
+            <p>Professionelle Reinigung von Treppenhäusern, Büros, Gemeinschaftsräumen und Außenbereichen. Für ein
+                sauberes und gepflegtes Erscheinungsbild Ihrer Immobilie.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">
+                <img src="service/garten.jpeg" alt="Garten- und Landschaftspflege">
             </div>
-            <div class="service-card">
-                <div class="service-icon">Bild folgt</div>
-                <h3>Winterdienst</h3>
-                <p>Zuverlässiger Räum- und Streudienst für sichere Wege und Zufahrten in der kalten Jahreszeit. Pünktlich und gründlich – damit Sie sicher unterwegs sind.</p>
+            <h3>Garten- und Landschaftspflege</h3>
+            <p>Fachgerechte Pflege Ihrer Grünflächen, Rasenmähen, Heckenschnitt, Bepflanzung und Gestaltung. Wir bringen
+                Ihre Außenanlagen zum Strahlen.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">
+                <img src="service/winterdienst.png" alt="Winterdienst">
             </div>
-            <div class="service-card">
-                <div class="service-icon">Bild folgt</div>
-                <h3>Kleinreparaturen</h3>
-                <p>Schnelle Hilfe bei kleineren Reparaturen und Instandhaltungsarbeiten. Von defekten Leuchten bis zu undichten Wasserhähnen – wir kümmern uns darum.</p>
+            <h3>Winterdienst</h3>
+            <p>Zuverlässiger Räum- und Streudienst für sichere Wege und Zufahrten in der kalten Jahreszeit. Pünktlich
+                und gründlich – damit Sie sicher unterwegs sind.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">
+                <img src="service/kleinrep.jpeg" alt="Kleinreparaturen">
             </div>
-            <div class="service-card">
-                <div class="service-icon">Bild folgt</div>
-                <h3>Objektbetreuung</h3>
-                <p>Ganzheitliche Betreuung Ihrer Immobilie mit individuell abgestimmten Leistungspaketen. Alles aus einer Hand für maximale Effizienz und Kostentransparenz.</p>
+            <h3>Kleinreparaturen</h3>
+            <p>Schnelle Hilfe bei kleineren Reparaturen und Instandhaltungsarbeiten. Von defekten Leuchten bis zu
+                undichten Wasserhähnen – wir kümmern uns darum.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">
+                <img src="service/betreung.jpeg" alt="Objektbetreuung">
+            </div>
+            <h3>Objektbetreuung</h3>
+            <p>Ganzheitliche Betreuung Ihrer Immobilie mit individuell abgestimmten Leistungspaketen. Alles aus einer
+                Hand für maximale Effizienz und Kostentransparenz.</p>
+        </div>
+    </div>
+
+</section>
+
+<!-- ==================== PROJECTS SECTION ==================== -->
+<section id="projects">
+    <h2 class="section-title">Unsere Projekte</h2>
+    <p class="section-subtitle">Referenzen unserer erfolgreichen Arbeiten</p>
+    <div class="projects-grid">
+        <div class="project-item">
+            <img src="project/projekt1.jpeg" alt="Wohnanlage Holzgerlingen">
+            <div class="project-overlay">
+                <h3>Baumpflege und -gestaltung</h3>
+                <ul class="project-features">
+                    <li>Baumschnitt</li>
+                    <li>Pflege</li>
+                    <li>Formgebung</li>
+                </ul>
             </div>
         </div>
-    </section>
-
-    <!-- ==================== PROJECTS SECTION ==================== -->
-    <section id="projects">
-        <h2 class="section-title">Unsere Projekte</h2>
-        <p class="section-subtitle">Referenzen unserer erfolgreichen Arbeiten</p>
-        <div class="projects-grid">
-            <div class="project-item">
-                <div class="project-placeholder">Projekt 1 - Bild folgt</div>
-                <div class="project-overlay">
-                    <h3>Wohnanlage Holzgerlingen</h3>
-                    <p>Komplette Außenanlagenpflege und Hausmeisterservice</p>
-                </div>
-            </div>
-            <div class="project-item">
-                <div class="project-placeholder">Projekt 2 - Bild folgt</div>
-                <div class="project-overlay">
-                    <h3>Gewerbeobjekt Stuttgart</h3>
-                    <p>Gebäudereinigung und Winterdienst</p>
-                </div>
-            </div>
-            <div class="project-item">
-                <div class="project-placeholder">Projekt 3 - Bild folgt</div>
-                <div class="project-overlay">
-                    <h3>Gartenneugestaltung</h3>
-                    <p>Komplette Neuanlage einer Grünfläche</p>
-                </div>
-            </div>
-            <div class="project-item">
-                <div class="project-placeholder">Projekt 4 - Bild folgt</div>
-                <div class="project-overlay">
-                    <h3>Bürokomplex Böblingen</h3>
-                    <p>Hausmeisterservice und Gebäudewartung</p>
-                </div>
-            </div>
-            <div class="project-item">
-                <div class="project-placeholder">Projekt 5 - Bild folgt</div>
-                <div class="project-overlay">
-                    <h3>Wohnquartier Sindelfingen</h3>
-                    <p>Ganzjährige Objektbetreuung</p>
-                </div>
-            </div>
-            <div class="project-item">
-                <div class="project-placeholder">Projekt 6 - Bild folgt</div>
-                <div class="project-overlay">
-                    <h3>Parkanlage</h3>
-                    <p>Landschaftspflege und Grünflächenwartung</p>
-                </div>
+        <div class="project-item">
+            <img src="project/projekt2.jpeg" alt="Gewerbeobjekt Stuttgart">
+            <div class="project-overlay">
+                <h3>Gewerbeobjekt Stuttgart</h3>
+                <p>Gebäudereinigung und Winterdienst</p>
             </div>
         </div>
-    </section>
+        <div class="project-item">
+            <img src="project/projekt3.jpeg" alt="Gartenneugestaltung">
+            <div class="project-overlay">
+                <h3>Gartenneugestaltung</h3>
+                <p>Komplette Neuanlage einer Grünfläche</p>
+            </div>
+        </div>
+        <div class="project-item">
+            <img src="project/projekt5.jpeg" alt="Bürokomplex Böblingen">
+            <div class="project-overlay">
+                <h3>Bürokomplex Böblingen</h3>
+                <p>Hausmeisterservice und Gebäudewartung</p>
+            </div>
+        </div>
+        <div class="project-item">
+            <img src="project/projekt4.jpeg" alt="Wohnquartier Sindelfingen">
+            <div class="project-overlay">
+                <h3>Wohnquartier Sindelfingen</h3>
+                <p>Ganzjährige Objektbetreuung</p>
+            </div>
+        </div>
+        <div class="project-item">
+            <img src="project/projekt6.jpeg" alt="Parkanlage">
+            <div class="project-overlay">
+                <h3>Parkanlage</h3>
+                <p>Landschaftspflege und Grünflächenwartung</p>
+            </div>
+        </div>
+    </div>
 
-    <!-- ==================== CONTACT SECTION ==================== -->
-    <section id="contact">
+</section>
+
+<!-- ==================== CONTACT SECTION ==================== -->
+<section id="contact">
     <h2 class="section-title">Kontakt</h2>
     <p class="section-subtitle">Kontaktinformationen</p>
 
@@ -962,13 +1028,13 @@
 
             <div class="map-container">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d446.5980485521373!2d9.008238493112986!3d48.64189006150315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6efa3676d6c2ec91%3A0x1c09341e63787419!2sMala%20Dienstleistungen!5e1!3m2!1sde!2sde!4v1767013114798!5m2!1sde!2sde"
-                    width="100%"
-                    height="600"
-                    style="border:0; border-radius: 10px;"
-                    allowfullscreen
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d446.5980485521373!2d9.008238493112986!3d48.64189006150315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6efa3676d6c2ec91%3A0x1c09341e63787419!2sMala%20Dienstleistungen!5e1!3m2!1sde!2sde!4v1767013114798!5m2!1sde!2sde"
+                        width="100%"
+                        height="600"
+                        style="border:0; border-radius: 10px;"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
         </div>
@@ -976,162 +1042,80 @@
 </section>
 
 
-
-    <!-- ==================== FOOTER ==================== -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#home">Startseite</a>
-                <a href="#services">Dienstleistungen</a>
-                <a href="#projects">Projekte</a>
-                <a href="#contact">Kontakt</a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 MALA Hausmeister Service. Alle Rechte vorbehalten.</p>
-                <p>Holzgerlingen | Baden-Württemberg | Deutschland</p>
-            </div>
+<!-- ==================== FOOTER ==================== -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="#home">Startseite</a>
+            <a href="#services">Dienstleistungen</a>
+            <a href="#projects">Projekte</a>
+            <a href="#contact">Kontakt</a>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MALA Hausmeister Service. Alle Rechte vorbehalten.</p>
+            <p>Holzgerlingen | Baden-Württemberg | Deutschland</p>
+        </div>
+    </div>
+</footer>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
-    <script>
-        // ==================== SCROLL ANIMATIONS ====================
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+    // ==================== SCROLL ANIMATIONS ====================
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            observer.observe(card);
-        });
-
-        // Observe project items
-        document.querySelectorAll('.project-item').forEach(item => {
-            observer.observe(item);
-        });
-
-        // ==================== HEADER SCROLL EFFECT ====================
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
         });
+    }, observerOptions);
 
-        // ==================== MOBILE MENU ====================
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
+    // Observe service cards
+    document.querySelectorAll('.service-card').forEach(card => {
+        observer.observe(card);
+    });
 
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    // Observe project items
+    document.querySelectorAll('.project-item').forEach(item => {
+        observer.observe(item);
+    });
+
+    // ==================== HEADER SCROLL EFFECT ====================
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // ==================== MOBILE MENU ====================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.textContent = '☰';
         });
+    });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-            });
-        });
-
-        // ==================== SMOOTH SCROLLING ====================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = document.getElementById('header').offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // ==================== CONTACT FORM ====================
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', (e) => {
+    // ==================== SMOOTH SCROLLING ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            alert('Vielen Dank für Ihre Nachricht! Wir werden uns schnellstmöglich bei Ihnen melden.');
-            contactForm.reset();
-        });
-
-        // ==================== SEARCH FUNCTIONALITY ====================
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-
-        // All searchable content
-        const searchableContent = [
-            { title: 'Hausmeisterservice', content: 'Umfassende Betreuung Ihrer Immobilie mit regelmäßigen Kontrollen', section: 'services' },
-            { title: 'Gebäudereinigung', content: 'Professionelle Reinigung von Treppenhäusern, Büros, Gemeinschaftsräumen', section: 'services' },
-            { title: 'Garten- und Landschaftspflege', content: 'Fachgerechte Pflege Ihrer Grünflächen, Rasenmähen, Heckenschnitt', section: 'services' },
-            { title: 'Winterdienst', content: 'Zuverlässiger Räum- und Streudienst für sichere Wege', section: 'services' },
-            { title: 'Kleinreparaturen', content: 'Schnelle Hilfe bei kleineren Reparaturen und Instandhaltungsarbeiten', section: 'services' },
-            { title: 'Objektbetreuung', content: 'Ganzheitliche Betreuung Ihrer Immobilie mit individuellen Leistungspaketen', section: 'services' },
-            { title: 'Über uns', content: 'Zuverlässiger Partner in Holzgerlingen Hausmeisterservice Gebäudereinigung Gartenpflege', section: 'about' },
-            { title: 'Kontakt', content: 'Kontaktformular Adresse Telefon Email Holzgerlingen', section: 'contact' },
-            { title: 'Projekte', content: 'Referenzen Wohnanlage Gewerbeobjekt Gartenneugestaltung Bürokomplex', section: 'projects' }
-        ];
-
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            
-            if (query.length < 2) {
-                searchResults.classList.remove('active');
-                return;
-            }
-
-            const results = searchableContent.filter(item => 
-                item.title.toLowerCase().includes(query) || 
-                item.content.toLowerCase().includes(query)
-            );
-
-            displaySearchResults(results, query);
-        });
-
-        function displaySearchResults(results, query) {
-            if (results.length === 0) {
-                searchResults.innerHTML = '<div class="no-results">Keine Ergebnisse gefunden</div>';
-                searchResults.classList.add('active');
-                return;
-            }
-
-            const html = results.map(result => `
-                <div class="search-result-item" onclick="navigateToSection('${result.section}')">
-                    <strong>${highlightText(result.title, query)}</strong>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.3rem;">
-                        ${highlightText(result.content.substring(0, 80) + '...', query)}
-                    </p>
-                </div>
-            `).join('');
-
-            searchResults.innerHTML = html;
-            searchResults.classList.add('active');
-        }
-
-        function highlightText(text, query) {
-            const regex = new RegExp(`(${query})`, 'gi');
-            return text.replace(regex, '<span class="highlight">$1</span>');
-        }
-
-        function navigateToSection(section) {
-            searchResults.classList.remove('active');
-            searchInput.value = '';
-            const target = document.getElementById(section);
+            const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 const headerHeight = document.getElementById('header').offsetHeight;
                 const targetPosition = target.offsetTop - headerHeight;
@@ -1140,15 +1124,96 @@
                     behavior: 'smooth'
                 });
             }
+        });
+    });
+
+    // ==================== CONTACT FORM ====================
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Vielen Dank für Ihre Nachricht! Wir werden uns schnellstmöglich bei Ihnen melden.');
+        contactForm.reset();
+    });
+
+    // ==================== SEARCH FUNCTIONALITY ====================
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    // All searchable content
+    const searchableContent = [
+        { title: 'Hausmeisterservice', content: 'Umfassende Betreuung Ihrer Immobilie mit regelmäßigen Kontrollen', section: 'services' },
+        { title: 'Gebäudereinigung', content: 'Professionelle Reinigung von Treppenhäusern, Büros, Gemeinschaftsräumen', section: 'services' },
+        { title: 'Garten- und Landschaftspflege', content: 'Fachgerechte Pflege Ihrer Grünflächen, Rasenmähen, Heckenschnitt', section: 'services' },
+        { title: 'Winterdienst', content: 'Zuverlässiger Räum- und Streudienst für sichere Wege', section: 'services' },
+        { title: 'Kleinreparaturen', content: 'Schnelle Hilfe bei kleineren Reparaturen und Instandhaltungsarbeiten', section: 'services' },
+        { title: 'Objektbetreuung', content: 'Ganzheitliche Betreuung Ihrer Immobilie mit individuellen Leistungspaketen', section: 'services' },
+        { title: 'Über uns', content: 'Zuverlässiger Partner in Holzgerlingen Hausmeisterservice Gebäudereinigung Gartenpflege', section: 'about' },
+        { title: 'Kontakt', content: 'Kontaktformular Adresse Telefon Email Holzgerlingen', section: 'contact' },
+        { title: 'Projekte', content: 'Referenzen Wohnanlage Gewerbeobjekt Gartenneugestaltung Bürokomplex', section: 'projects' }
+    ];
+
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+
+        if (query.length < 2) {
+            searchResults.classList.remove('active');
+            return;
         }
 
-        // Close search results when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                searchResults.classList.remove('active');
-            }
-        });
-    </script>
+        const results = searchableContent.filter(item =>
+            item.title.toLowerCase().includes(query) ||
+            item.content.toLowerCase().includes(query)
+        );
+
+        displaySearchResults(results, query);
+    });
+
+    function displaySearchResults(results, query) {
+        if (results.length === 0) {
+            searchResults.innerHTML = '<div class="no-results">Keine Ergebnisse gefunden</div>';
+            searchResults.classList.add('active');
+            return;
+        }
+
+        const html = results.map(result => `
+            <div class="search-result-item" onclick="navigateToSection('${result.section}')">
+                <strong>${highlightText(result.title, query)}</strong>
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.3rem;">
+                    ${highlightText(result.content.substring(0, 80) + '...', query)}
+                </p>
+            </div>
+        `).join('');
+
+        searchResults.innerHTML = html;
+        searchResults.classList.add('active');
+    }
+
+    function highlightText(text, query) {
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+    function navigateToSection(section) {
+        searchResults.classList.remove('active');
+        searchInput.value = '';
+        const target = document.getElementById(section);
+        if (target) {
+            const headerHeight = document.getElementById('header').offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+    // Close search results when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.classList.remove('active');
+        }
+    });
+</script>
 </body>
 </html>
                     
