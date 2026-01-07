@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MALA Hausmeister Service - Dienstleistungen</title>
     <link rel="icon" href="mala-logo.png" type="image/png">
+    <!-- Structured Data für Suchmaschinen / Brand Logo -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MALA Hausmeister Service",
+      "url": "https://www.maladienstleistungen.de",
+      "logo": "https://www.maladienstleistungen.de/mala-logo.png",
+      "sameAs": [
+        "",
+        ""
+      ]
+    }
+    </script>
     <style>
         /* ==================== RESET & BASE STYLES ==================== */
         * {
@@ -796,8 +810,8 @@
     margin-bottom: 0.3rem;
 }
 
-      * ==================== REVIEWS SECTION ==================== */
-..reviews-section {
+      /* ==================== REVIEWS SECTION ==================== */
+.reviews-section {
     padding: 5rem 1.5rem;
     background: #f7f7f7;
 }
@@ -850,6 +864,332 @@
     margin-top: 0.2rem;
 }
 
+/* ==================== COMPARISON SECTION ==================== */
+.comparison-section {
+    padding: 5rem 2rem;
+    background: var(--bg-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.comparison-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(44, 95, 45, 0.03), rgba(74, 140, 74, 0.03));
+    z-index: 0;
+}
+
+.comparison-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.comparison-intro {
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.comparison-intro h2 {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.comparison-intro h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.comparison-intro p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-top: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.comparison-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateY(40px);
+    position: relative;
+}
+
+.comparison-card.visible {
+    animation: slideInUp 0.8s ease forwards;
+}
+
+.comparison-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MALA Card - Special Styling */
+.comparison-card.mala-card {
+    border: 3px solid var(--primary-color);
+    animation-delay: 0.2s;
+}
+
+.comparison-card.mala-card::before {
+    content: '✓ Empfohlen';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(44, 95, 45, 0.3);
+}
+
+/* Other Card Styling */
+.comparison-card.other-card {
+    animation-delay: 0.4s;
+    opacity: 0.95;
+}
+
+.comparison-image {
+    width: 100%;
+    height: 350px;
+    background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 1.1rem;
+    overflow: hidden;
+    position: relative;
+
+    /* Abrundung nur oben */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.comparison-image img {
+     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+
+    /* Damit das Bild die Abrundung respektiert */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.comparison-card:hover .comparison-image img {
+    transform: scale(1.1);
+}
+
+.comparison-content {
+    padding: 2.5rem;
+}
+
+.comparison-content h3 {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.comparison-card.mala-card .comparison-content h3 {
+    color: var(--primary-color);
+}
+
+.company-icon {
+    font-size: 2.5rem;
+}
+
+.comparison-subtitle {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.comparison-features {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.comparison-features li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: var(--transition);
+}
+
+.comparison-features li:last-child {
+    border-bottom: none;
+}
+
+.comparison-features li:hover {
+    background: var(--bg-light);
+    padding-left: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-right: 1rem;
+    border-radius: 8px;
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    min-width: 30px;
+    margin-top: 0.2rem;
+}
+
+.mala-card .feature-icon {
+    color: var(--primary-color);
+}
+
+.other-card .feature-icon {
+    color: #999;
+}
+
+.feature-text {
+    flex: 1;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+.feature-text strong {
+    color: var(--secondary-color);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.comparison-cta {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.comparison-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    border: 2px solid var(--primary-color);
+}
+
+.comparison-button:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(44, 95, 45, 0.3);
+}
+
+.other-card .comparison-button {
+    background: #888;
+    border-color: #888;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.other-card .comparison-button:hover {
+    background: #888;
+    border-color: #888;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1024px) {
+    .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .comparison-card.other-card {
+        animation-delay: 0.6s;
+    }
+}
+
+@media (max-width: 768px) {
+    .comparison-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .comparison-intro h2 {
+        font-size: 2rem;
+    }
+
+    .comparison-intro p {
+        font-size: 1rem;
+    }
+
+    .comparison-content {
+        padding: 2rem;
+    }
+
+    .comparison-content h3 {
+        font-size: 1.6rem;
+    }
+
+    .comparison-image {
+        height: 250px;
+    }
+
+    .comparison-card.mala-card::before {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+        top: 15px;
+        right: 15px;
+    }
+}
+
+        .company-icon img {
+    width: 100px;   /* Größe anpassen */
+    height: 100px;
+    object-fit: contain;
+}
 
 
     </style>
@@ -865,6 +1205,7 @@
             <li><a href="#home">Startseite</a></li>
             <li><a href="#services">Dienstleistungen</a></li>
             <li><a href="#projects">Unsere Projekte</a></li>
+            <li><a href="#vergleich">Warum MALA</a></li>
             <li><a href="#reviews">Kundenrezensionen</a></li>
             <li><a href="#contact">Kontakt</a></li>
             <!--Suchleiste eventuell einfügen-->
@@ -875,7 +1216,7 @@
 <!-- ==================== HERO SECTION ==================== -->
 <section class="hero" id="home">
     <div class="hero-content">
-        <h1>MALA – Gebäude & Grün im Einklang</h1>
+        <h1>MALA – IHR PARTNER RUND UMS HÄUSLE!</h1>
         <p>Kompetenter Komplettservice für Ihre Immobilie – Alles aus einer Hand</p>
         <a href="#contact" class="cta-button">Jetzt Kontakt aufnehmen</a>
     </div>
@@ -888,7 +1229,7 @@
     <div class="about-content">
         <div class="about-text">
             <h3>Ihre Immobilie in besten Händen</h3>
-            <p>Willkommen bei MALA! Wir sind Ihr zuverlässiger Partner für Hausmeisterservice, Gebäudereinigung und
+            <p>Willkommen bei MALA Hausmeister und Dienstleistungen Holzgerlingen! Wir sind Ihr zuverlässiger Partner für Hausmeisterservice, Gebäudereinigung und
                 Garten- und Landschaftspflege im Kreis Holzgerlingen.</p>
             <p>Mit langjähriger Erfahrung und einem engagierten Team bieten wir Ihnen maßgeschneiderte Lösungen für die
                 professionelle Betreuung Ihrer Immobilie – innen wie außen.</p>
@@ -1066,6 +1407,145 @@
     </div>
 
 </section>
+<!-- ==================== COMPARISON SECTION ==================== -->
+<section id="vergleich" class="comparison-section">
+    <div class="comparison-container">
+        <div class="comparison-intro">
+            <h2>Warum MALA?</h2>
+            <p>Sehen Sie selbst, was uns von anderen Dienstleistern unterscheidet – Qualität, Zuverlässigkeit und persönlicher Service aus einer Hand.</p>
+        </div>
+
+        <div class="comparison-grid">
+            <!-- MALA Card -->
+            <div class="comparison-card mala-card visible">
+                <div class="comparison-image">
+                    <img src="vergleich/MALA.jpeg" alt="MALA Hausmeister Service">
+                </div>
+                <div class="comparison-content">
+                    <h3>
+                        <span class="company-icon">
+    <img src="mala-logo.png" alt="Auszeichnung" />
+</span>
+                        MALA Hausmeister Service
+                    </h3>
+                    <p class="comparison-subtitle">Ihr regionaler Komplettservice-Partner in Holzgerlingen</p>
+
+                    <ul class="comparison-features">
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">
+                                <strong>Alles aus einer Hand</strong>
+                                Hausmeisterservice, Reinigung, Garten- und Landschaftspflege sowie Winterdienst – komplett koordiniert
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">
+                                <strong>Schnelle Reaktionszeit</strong>
+                                Als lokales Unternehmen sind wir in Notfällen schnell vor Ort – meist innerhalb von 2 Stunden
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">
+                                <strong>Moderne Ausstattung</strong>
+                                Professionelle Fahrzeuge und hochwertige Geräte für effiziente und qualitativ hochwertige Arbeit
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">
+                                <strong>Persönlicher Ansprechpartner</strong>
+                                Direkter Kontakt zu Ihrem festen Betreuer – keine Callcenter, keine Warteschleifen
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">
+                                <strong>Faire & transparente Preise</strong>
+                                Individuelle Angebote ohne versteckte Kosten – Sie wissen immer, wofür Sie bezahlen
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <span class="feature-text">
+                                <strong>Regionale Expertise</strong>
+                                Wir kennen die Besonderheiten der Region und arbeiten mit lokalen Standards
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="comparison-cta">
+                        <a href="#contact" class="comparison-button">Jetzt Angebot anfragen</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Companies Card -->
+            <div class="comparison-card other-card">
+                <div class="comparison-image">
+                    <img src="vergleich/Vergleich.jpeg" alt="Andere Dienstleister">
+                </div>
+                <div class="comparison-content">
+                    <h3>
+                        <span class="company-icon"></span>
+                        Andere Dienstleister
+                    </h3>
+                    <p class="comparison-subtitle">Typische überregionale Anbieter</p>
+
+                    <ul class="comparison-features">
+                        <li>
+                            <span class="feature-icon">−</span>
+                            <span class="feature-text">
+                                <strong>Mehrere Ansprechpartner</strong>
+                                Für verschiedene Bereiche müssen oft separate Firmen beauftragt werden – komplizierte Koordination
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">−</span>
+                            <span class="feature-text">
+                                <strong>Längere Wartezeiten</strong>
+                                Überregionale Dienstleister brauchen oft Tage für Notfalltermine – teils weite Anfahrtswege
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">−</span>
+                            <span class="feature-text">
+                                <strong>Standard-Ausstattung</strong>
+                                Oft ältere Geräte und Fahrzeuge im Einsatz – nicht immer auf neuestem Stand der Technik
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">−</span>
+                            <span class="feature-text">
+                                <strong>Wechselnde Mitarbeiter</strong>
+                                Häufig unterschiedliche Personen bei jedem Termin – keine persönliche Beziehung
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">−</span>
+                            <span class="feature-text">
+                                <strong>Intransparente Kosten</strong>
+                                Pauschalangebote mit versteckten Zusatzkosten – oft teure Überraschungen bei der Rechnung
+                            </span>
+                        </li>
+                        <li>
+                            <span class="feature-icon">−</span>
+                            <span class="feature-text">
+                                <strong>Fehlende Ortskenntnisse</strong>
+                                Keine Erfahrung mit regionalen Besonderheiten – oft allgemeine Standardlösungen
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="comparison-cta">
+                        <span class="comparison-button">Nicht verfügbar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <section id="reviews" class="reviews-section">
@@ -1181,6 +1661,8 @@
 
 <!-- ==================== JAVASCRIPT ==================== -->
 <script>
+    document.body.classList.add('js-animate');
+
     // ==================== SCROLL ANIMATIONS ====================
     const observerOptions = {
         threshold: 0.1,
@@ -1340,6 +1822,113 @@
 document.querySelectorAll('.review-card').forEach(card => {
     observer.observe(card);
 });
+
+// ==================== COMPARISON SECTION ANIMATIONS ====================
+const comparisonObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px 0px 0px'
+});
+
+// Observe comparison cards
+document.querySelectorAll('.comparison-card').forEach(card => {
+    comparisonObserver.observe(card);
+});
+
+// ==================== SMOOTH HOVER EFFECTS ====================
+document.querySelectorAll('.comparison-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    });
+
+    card.addEventListener('mouseleave', function() {
+        this.style.transition = 'all 0.3s ease';
+    });
+});
+
+// ==================== PARALLAX EFFECT ON SCROLL ====================
+window.addEventListener('scroll', () => {
+    const comparisonSection = document.querySelector('.comparison-section');
+    if (!comparisonSection) return;
+
+    const rect = comparisonSection.getBoundingClientRect();
+    const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
+
+    if (scrollPercent > 0 && scrollPercent < 1) {
+        const cards = document.querySelectorAll('.comparison-card');
+        cards.forEach((card, index) => {
+            const offset = (scrollPercent - 0.5) * 20 * (index === 0 ? 1 : -1);
+            card.style.transform = `translateY(${offset}px)`;
+        });
+    }
+});
+
+// ==================== FEATURE HIGHLIGHT ON HOVER ====================
+document.querySelectorAll('.comparison-features li').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+        const icon = this.querySelector('.feature-icon');
+        if (icon) {
+            icon.style.transform = 'scale(1.3) rotate(360deg)';
+            icon.style.transition = 'transform 0.5s ease';
+        }
+    });
+
+    item.addEventListener('mouseleave', function() {
+        const icon = this.querySelector('.feature-icon');
+        if (icon) {
+            icon.style.transform = 'scale(1) rotate(0deg)';
+        }
+    });
+});
+
+// ==================== BUTTON RIPPLE EFFECT ====================
+document.querySelectorAll('.comparison-button').forEach(button => {
+    button.addEventListener('click', function(e) {
+        if (this.parentElement.parentElement.classList.contains('other-card')) {
+            e.preventDefault();
+            return;
+        }
+
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple 0.6s ease-out';
+        ripple.style.pointerEvents = 'none';
+
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 600);
+    });
+});
+
+// Add ripple animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
 
 </script>
 </body>
